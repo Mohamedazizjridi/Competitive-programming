@@ -1,0 +1,68 @@
+/*
+      ██╗██████╗ ██╗██████╗ ██╗
+      ██║██╔══██╗██║██╔══██╗██║
+      ██║██████╔╝██║██║  ██║██║
+ ██   ██║██╔══██╗██║██║  ██║██║
+ ╚█████╔╝██║  ██║██║██████╔╝██║
+  ╚════╝ ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝
+*/
+#include<bits/stdc++.h>
+using namespace std;
+ll n,k;
+ll t[200005];
+bool f(ll mid)
+{
+    if(mid<*max_element(t,t+n))
+    {
+        return false;
+    }
+    ll cntsubarry=0;
+    ll maxxsubaarysum=0;
+    ll sum=0;
+    for(int i=0;i<n-1;i++)
+    {
+        sum+=t[i];
+        if(sum+t[i+1]>mid)
+        {
+            cntsubarry++;
+            maxxsubaarysum=max(sum,maxxsubaarysum);
+            sum=0;
+        }
+    }
+    return cntsubarry+1<=k;
+
+}
+void solve() {
+    cin >> n;
+    cin>>k;
+    for(int i=0;i<n;i++)
+    {
+        cin>>t[i];
+    }
+    ll left=-1;
+    ll right=1e18+1;
+    while(l+1<r)// search for first yes monotonic function 00000011111111
+    {
+
+        ll mid=(right+left)/2;
+        if(f(mid))
+        {
+            right=mid;
+        }
+        else{
+            left=mid;
+        }
+    }
+    cout<<right<<endl;
+}
+int main() {
+   // freopen("pairup.in", "r", stdin);
+    //freopen("pairup.out", "w", stdout);
+	int t=1;
+	//cin>>t;
+	while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
