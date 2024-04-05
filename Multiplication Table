@@ -1,0 +1,53 @@
+/*
+      ██╗██████╗ ██╗██████╗ ██╗
+      ██║██╔══██╗██║██╔══██╗██║
+      ██║██████╔╝██║██║  ██║██║
+ ██   ██║██╔══██╗██║██║  ██║██║
+ ╚█████╔╝██║  ██║██║██████╔╝██║
+  ╚════╝ ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝
+*/
+#include<bits/stdc++.h>
+using namespace std;
+typedef         long long ll;
+ll  n;
+bool  check(ll m)// f(x+1)>=f(x) f(x)= number of element wich goes befor x
+{
+    ll cnt=0;
+    for(ll i=1;i<=n;i++)
+    {
+        cnt+=min(m/i,n);
+    }
+    ll  ans =(n*n)/2;
+    return cnt>=(ans+1);
+}
+void solve() {
+
+    cin>>n;
+    ll left=-1;
+    ll right=n*n+1;
+    while(left+1<right)//binary search on first yes 000001111111
+    {
+        ll m=(left+right)/2;
+        if(check(m))
+        {
+            right=m;
+        }
+        else{
+            left=m;
+        }
+    }
+    cout<<right<<endl;
+}
+
+int main() {
+   // freopen("pairup.in", "r", stdin);
+    //freopen("pairup.out", "w", stdout);
+	int t=1;
+	//cin>>t;
+	while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+//always prepare yourself for the next step!!
